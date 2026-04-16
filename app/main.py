@@ -29,10 +29,25 @@ def deletar_dados(con, cur, id):
     con.commit()
 
 
-# criamos a função de inserir vários dados
 def inserir_muitos_dados(con, cur, dados):
     cur.executemany('INSERT INTO clientes (nome, email) VALUES (?,?);', dados)
     con.commit()
+
+# criamos a função para retornar APENAS UM cliente:
+def consultar_cliente(cur, id):
+    cur.execute('SELECT * FROM clientes WHERE id= ?', (id, ))
+
+    return cur.fetchone()
+
+# criamos a função para retornar TODOS os clientes:
+def consultar_todos_clientes(cur):
+    cur.execute('SELECT * FROM clientes')
+    results = cur.fetchall()
+
+    for row in results:
+        print(row)
+
+
 
 # inserir_dados(con, cur, "Ana", "ana.silvana@mail.com")
 
@@ -40,12 +55,17 @@ def inserir_muitos_dados(con, cur, dados):
 
 # deletar_dados(con, cur, 2)
 
-# fazemos uma lista de tuplas:
-dados = [
-    ("Maria", "maria.belem@mail.com"),
-    ("José", "jose.belem@mail.com"),
-    ("Guilherme", "guilherme.bd@mail.com"),
-    ("Ana", "ana.silvana@mail.com"),
-]
+#dados = [("Maria", "maria.belem@mail.com"),("José", "jose.belem@mail.com"),("Guilherme", "guilherme.bd@mail.com"),("Ana", "ana.silvana@mail.com"),]
 
-inserir_muitos_dados(con, cur, dados)
+#inserir_muitos_dados(con, cur, dados)
+
+
+# Consultando APENAS UM cliente
+cliente = consultar_cliente(cur, 1)
+print(cliente)
+
+# Consultando TODOS os clientes
+clientes = consultar_todos_clientes(cur)
+print(clientes)
+
+
