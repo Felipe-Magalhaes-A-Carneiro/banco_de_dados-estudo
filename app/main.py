@@ -16,11 +16,20 @@ def inserir_dados(con, cur, nome, email):
     cur.execute('INSERT INTO clientes (nome, email) VALUES (?, ?);', (data))
     con.commit()
 
-# criamos a função para atualziar dados, sendo assim o con.commit() já será executado ao chama-lo
+
 def atualizar_dados(con, cur, nome, email, id):
     data = (nome, email, id)
     cur.execute('UPDATE clientes SET nome= ?, email= ? WHERE id = ?;', data)
     con.commit()
 
+# criamos a função de deletar
+def deletar_dados(con, cur, id):
+    data = (id, )
+    cur.execute('DELETE FROM clientes WHERE id = ?;', data)
+    con.commit()
 
-atualizar_dados(con, cur, "Felipe Magalhães", "felipe.araujo@mail.com", 1)
+# inserir_dados(con, cur, "Ana", "ana.silvana@mail.com")
+
+# atualizar_dados(con, cur, "Felipe Magalhães", "felipe.araujo@mail.com", 1)
+
+deletar_dados(con, cur, 2)
