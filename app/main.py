@@ -22,14 +22,30 @@ def atualizar_dados(con, cur, nome, email, id):
     cur.execute('UPDATE clientes SET nome= ?, email= ? WHERE id = ?;', data)
     con.commit()
 
-# criamos a função de deletar
+
 def deletar_dados(con, cur, id):
     data = (id, )
     cur.execute('DELETE FROM clientes WHERE id = ?;', data)
+    con.commit()
+
+
+# criamos a função de inserir vários dados
+def inserir_muitos_dados(con, cur, dados):
+    cur.executemany('INSERT INTO clientes (nome, email) VALUES (?,?);', dados)
     con.commit()
 
 # inserir_dados(con, cur, "Ana", "ana.silvana@mail.com")
 
 # atualizar_dados(con, cur, "Felipe Magalhães", "felipe.araujo@mail.com", 1)
 
-deletar_dados(con, cur, 2)
+# deletar_dados(con, cur, 2)
+
+# fazemos uma lista de tuplas:
+dados = [
+    ("Maria", "maria.belem@mail.com"),
+    ("José", "jose.belem@mail.com"),
+    ("Guilherme", "guilherme.bd@mail.com"),
+    ("Ana", "ana.silvana@mail.com"),
+]
+
+inserir_muitos_dados(con, cur, dados)
