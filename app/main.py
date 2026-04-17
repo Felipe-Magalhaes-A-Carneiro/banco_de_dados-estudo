@@ -47,6 +47,12 @@ def consultar_todos_clientes(cur):
     for row in results:
         print(row)
 
+def listar_por_ordem_todos_clientes(cur):
+    cur.execute('SELECT * FROM clientes ORDER BY nome;')
+    results = cur.fetchall()
+
+    for row in results:
+        print(row)
 
 
 # inserir_dados(con, cur, "Ana", "ana.silvana@mail.com")
@@ -69,3 +75,6 @@ clientes = consultar_todos_clientes(cur)
 print(clientes)
 
 
+# Consultando TODOS os clientes de forma ordenada
+clientes_por_nome = listar_por_ordem_todos_clientes(cur)
+print(clientes_por_nome)
