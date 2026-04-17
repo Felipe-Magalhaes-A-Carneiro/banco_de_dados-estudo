@@ -5,6 +5,7 @@ ROOT_PATH = Path(__file__).parent
 
 con = sqlite3.connect(ROOT_PATH / 'meu_banco_de_dados.db')
 cur = con.cursor()
+cur.row_factory = sqlite3.Row
 
 def criar_tabela(cur):
     cur.execute("CREATE TABLE clientes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(200), email VARCHAR(150))")
@@ -68,13 +69,15 @@ def listar_por_ordem_todos_clientes(cur):
 
 # Consultando APENAS UM cliente
 cliente = consultar_cliente(cur, 1)
-print(cliente)
+print(dict(cliente)) # fazermos com que o 'cliente' se torne um dicionario
 
-# Consultando TODOS os clientes
-clientes = consultar_todos_clientes(cur)
-print(clientes)
+# Retornemos uma mensagem customizada com o uso do Row
+print(f"Seja bem-vindo(a) ao sistema, {cliente[1]}") 
 
 
-# Consultando TODOS os clientes de forma ordenada
-clientes_por_nome = listar_por_ordem_todos_clientes(cur)
-print(clientes_por_nome)
+# clientes = consultar_todos_clientes(cur)
+# print(clientes)
+
+
+# clientes_por_nome = listar_por_ordem_todos_clientes(cur)
+# print(clientes_por_nome)
