@@ -9,7 +9,6 @@ cur.row_factory = sqlite3.Row
 
 def criar_tabela(cur):
     cur.execute("CREATE TABLE clientes(id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(200), email VARCHAR(150))")
-    con.commit()
     
 
 def inserir_dados(con, cur, nome, email):
